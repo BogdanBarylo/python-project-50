@@ -9,8 +9,8 @@ def get_parser():
     parser.add_argument('second_file')
     parser.add_argument('-f', '--format', help='set format of output')
     args = parser.parse_args()
-    if args.format:
-        print('format change')
+    print(args)
+        
     
 
 def main():
