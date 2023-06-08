@@ -1,35 +1,56 @@
 import json
 
 
+
 def generate_diff(file1, file2):
-    f1 = json.load(open('json_test_files/' + file1, 'r')) # скорее всего запись не верная, нужно переделать
-    f2 = json.load(open('json_test_files/' + file2,'r'))
-    diff = []
-    diff_minus = [] # очень много ресурсов для сортировки, тем более это будет как-то по дурацки
-    diff_plus = [] 
-    for first, second in zip(f1 ,f2): # вроде first = f1.keys()//// вообще логика плохая, если будет не равно количество элементов
-        if first == second:                                        #то остаток не добавится, и мы получим не верный ответ
-            if f1[first] == f2[second]:
-                diff.append(f1)            #спросить Глеба про логику
-            elif f1[first] != f2[second]:
-                diff_minus.append(f1)
-                diff_plus.append(f2)
+    dict_1 = make_argument(file1)
+    dict_2 = make_argument(file2)
+    diff_string = find_diff(dict_1, dict_2)
+    result = make_view(diff_string)
+    return result
+
+
+def make_argument(path):
+    with open(path, 'r') as f:
+        content = json.load(f)
+        new_dict = dict(content)
+    return new_dict
+
+
+def find_diff(dict_1, dict_2):
+    set_keys_1 = set(dict_1.keys())
+    set_keys_2 = set(dict_2.keys())
+    intersection_set = set_keys_1.intersection(set_keys_2)
+    only_diff_keys_1 = set_keys_1 - set_keys_2
+    only_diff_keys_2 = set_keys_2 - set_keys_1
+    removed_string =[{'key': x, 'value': dict_1.get(x), 'type': 'removed'} for x in only_diff_keys_1]
+    added_string = [{'key': x, 'value': dict_2.get(x), 'type': 'added'} for x in only_diff_keys_2]
+    intersection_string = []
+    for i in intersection_set:
+        if dict_1.get(i) == dict_2.get(i):
+            intersection_string.append({'key': i, 'value': dict_1.get(i), 'type': 'default'})
         else:
-            diff_minus.append(f1)
-            diff_plus.append(f2)
-    f1.close()
-    f2.close()
-    return make_correct_view(diff, diff_minus, diff_plus) # cкорее всего результат не будет выглядеть как список, может если добавить +\n то ок
+            intersection_string.append({'key': i, 'value': dict_1.get(i), 'type': 'removed'})
+            intersection_string.append({'key': i, 'value': dict_2.get(i), 'type': 'added'})
+    result_string = []
+    result_string.extend(removed_string)
+    result_string.extend(added_string)
+    result_string.extend(intersection_string)
+    return result_string
     
 
-def make_correct_view(diff, diff_minus, diff_plus):
-    diff.extend(diff_minus).extend(diff_plus)
-    diff.sort()
-    for i in diff:
-        if i in diff_minus:             
-            i = '- ' + ''.join(i)
-        elif i in diff_plus:
-            i = '+ ' + ''.join(i)
+def make_view(diff_string):
+    sorted_string = sorted(diff_string, key=lambda x: x['key'][0])
+    sorted_result = []
+    for x in sorted_string:
+        if x['type'] == 'added':
+            sorted_result.append(f"+ {x['key']}: {x['value']}")
+        elif x['type'] == 'removed':
+            sorted_result.append(f"- {x['key']}: {x['value']}")
         else:
-            continue
-    return diff
+            sorted_result.append(f"  {x['key']}: {x['value']}")
+    result = '\n'.join(sorted_result)
+    result = result.replace('True','true').replace('False','false')
+    return result
+
+        
