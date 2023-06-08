@@ -49,8 +49,9 @@ def make_view(diff_string):
             sorted_result.append(f"- {x['key']}: {x['value']}")
         else:
             sorted_result.append(f"  {x['key']}: {x['value']}")
-    result = '\n'.join(sorted_result)
+    result = '\n'.join(sorted_result)                                   #Спросить Глеба насчет неймингов, норм ли 3 раза переписывать переменную
     result = result.replace('True','true').replace('False','false')
+    result = '{' + '\n' + result + '\n' +'}'
     return result
 
         
