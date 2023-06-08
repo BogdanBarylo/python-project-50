@@ -5,8 +5,9 @@ import json
 def generate_diff(file1, file2):
     dict_1 = make_argument(file1)
     dict_2 = make_argument(file2)
-    diff_string = find_diff(dict_1, dict_2)
-    result = make_view(diff_string)
+    diff_list = find_diff(dict_1, dict_2)
+    sorted_result = get_sort(diff_list)
+    result = make_view(sorted_result)
     return result
 
 
@@ -39,7 +40,7 @@ def find_diff(dict_1, dict_2):
     return result_string
     
 
-def make_view(diff_string):
+def get_sort(diff_string):
     sorted_string = sorted(diff_string, key=lambda x: x['key'][0])
     sorted_result = []
     for x in sorted_string:
@@ -49,6 +50,10 @@ def make_view(diff_string):
             sorted_result.append(f"- {x['key']}: {x['value']}")
         else:
             sorted_result.append(f"  {x['key']}: {x['value']}")
+    return sorted_result
+
+
+def make_view(sorted_result):
     result = '\n'.join(sorted_result)                                   #Спросить Глеба насчет неймингов, норм ли 3 раза переписывать переменную
     result = result.replace('True','true').replace('False','false')
     result = '{' + '\n' + result + '\n' +'}'
