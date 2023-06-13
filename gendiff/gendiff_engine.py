@@ -1,5 +1,4 @@
-import json
-import yaml
+import json, yaml
 from gendiff.parser import find_diff
 
 
