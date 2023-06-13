@@ -1,4 +1,5 @@
 import json
+import yaml
 from gendiff.parser import find_diff
 
 
@@ -11,10 +12,17 @@ def generate_diff(file1, file2):
 
 
 def make_argument(path):
-    with open(path, 'r') as f:
-        content = json.load(f)
-        new_dict = dict(content)
-    return new_dict
+    check_format = path.split(".")[-1]
+    if check_format == 'json':
+        with open(path, 'r') as f:
+            content = json.load(f)
+            new_dict = dict(content)
+        return new_dict
+    elif check_format == 'yml' or check_format == 'yaml':
+        with open(path, 'r') as f:
+            content = yaml.load(f, Loader=yaml.Loader)
+            new_dict = dict(content)
+        return new_dict
 
 
 def get_sort(diff_string):
