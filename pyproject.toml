@@ -12,6 +12,7 @@ classifiers = ["Programming Language :: Python :: 3.10",
 [tool.poetry.dependencies]
 python = "^3.10"
 pytest-cov = "^4.1.0"
+pyyaml = "^5.4.1" 
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
