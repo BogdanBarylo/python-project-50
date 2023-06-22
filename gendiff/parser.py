@@ -27,8 +27,14 @@ def find_diff(dict_1, dict_2):
             intersection_string.append({'key': key,
                                         'value': value_2,
                                         'type': 'added'})
-    result_string = []
-    result_string.extend(removed_string)
-    result_string.extend(added_string)
-    result_string.extend(intersection_string)
-    return result_string
+    result = []
+    result.extend(removed_string)
+    result.extend(added_string)
+    result.extend(intersection_string)
+    sorted_result = make_sort(result)
+    return sorted_result
+
+
+def make_sort(result):
+    sorted_result = sorted(result, key=lambda x: x['key'])
+    return sorted_result
