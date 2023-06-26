@@ -4,7 +4,7 @@ from gendiff.parser import find_diff
 from gendiff.stylish import make_view
 
 
-def generate_diff(file1, file2):
+def generate_diff(file1, file2, formater="stylish"):
     dict_1 = make_argument(file1)
     dict_2 = make_argument(file2)
     diff_list = find_diff(dict_1, dict_2)
