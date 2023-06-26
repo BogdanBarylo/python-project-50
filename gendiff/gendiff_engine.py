@@ -4,7 +4,6 @@ from gendiff.parser import find_diff
 from gendiff.stylish import make_view
 
 
-
 def generate_diff(file1, file2):
     dict_1 = make_argument(file1)
     dict_2 = make_argument(file2)
@@ -25,4 +24,3 @@ def make_argument(path):
             content = yaml.load(f, Loader=yaml.Loader)
             new_dict = dict(content)
         return new_dict
-
