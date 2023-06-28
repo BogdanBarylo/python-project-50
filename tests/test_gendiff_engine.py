@@ -3,17 +3,18 @@ from gendiff.gendiff_engine import generate_diff
 
 with (
     open('tests/fixtures/result_test.txt', 'r') as
-    result_file,
+         result_file,
     open('tests/fixtures/result_deep_test.txt', 'r') as
-    result_deep_file,
+         result_deep_file,
     open('tests/fixtures/result_test_plain.txt', 'r') as
-    result_plain,
+         result_plain,
     open('tests/fixtures/result_deep_test_plain.txt', 'r') as
-    result_deep_plain,
+         result_deep_plain,
     open('tests/fixtures/result_test_json_formater.txt', 'r') as
-    result_json_form,
+         result_json_form,
     open('tests/fixtures/result_deep_test_json_formater.txt', 'r') as 
-    result_json_deep_form):
+         result_json_deep_form
+    ):
     RESULT = result_file.read()
     DEEP_RESULT = result_deep_file.read()
     RESULT_PLAIN = result_plain.read()
