@@ -7,8 +7,7 @@ DESCRIPTION = 'Compares two configuration files and shows a difference.'
 
 
 def main():
-    parser = argparse.ArgumentParser(
-                                     prog=NAME,
+    parser = argparse.ArgumentParser(prog=NAME,
                                      description=DESCRIPTION)
     parser.add_argument('first_file')
     parser.add_argument('second_file')
