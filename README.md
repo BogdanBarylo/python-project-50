@@ -11,7 +11,7 @@ Features of the utility:
 Supports different input formats: yaml, json
 Report generation as plain, stylish and json
 
-#незабыть добавить аксинему плоского сравнения
+
 1. Comparison of json files and yaml files, if you don't choose a formatter, default one will be used.
 [![asciicast](https://asciinema.org/a/xkvqF9bg9rfYnCbabdmlKYooa.svg)](https://asciinema.org/a/xkvqF9bg9rfYnCbabdmlKYooa)
 
