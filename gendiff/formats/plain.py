@@ -32,5 +32,7 @@ def to_str(value):
         return 'null'
     elif isinstance(value, dict):
         return '[complex value]'
+    elif isinstance(value, int):
+        return str(value)
     else:
         return f"'{str(value)}'"
