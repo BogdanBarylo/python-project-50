@@ -22,11 +22,9 @@ def find_diff(dict_1, dict_2):
                                         'type': 'container'})
         else:
             intersection_string.append({'key': key,
-                                        'value': value_1,
-                                        'type': 'removed'})
-            intersection_string.append({'key': key,
-                                        'value': value_2,
-                                        'type': 'added'})
+                                        'value_before': value_1,
+                                        'value_after': value_2,
+                                        'type': 'changed'})
     result = []
     result.extend(removed_string)
     result.extend(added_string)

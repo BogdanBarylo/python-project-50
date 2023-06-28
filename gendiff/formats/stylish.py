@@ -15,6 +15,11 @@ def make_view(sorted_result):
         elif node['type'] == 'removed':
             return (f"{indent}- {node['key']}: "
                     f"{to_str(node['value'], level + 2)}")
+        elif node['type'] == 'changed':
+            return (f"{indent}- {node['key']}: "
+                    f"{to_str(node['value_before'], level + 2)}\n"
+                    f"{indent}+ {node['key']}: "
+                    f"{to_str(node['value_after'], level + 2)}")
         else:
             return (f"{indent}  {node['key']}: "
                     f"{to_str(node['value'], level + 2)}")

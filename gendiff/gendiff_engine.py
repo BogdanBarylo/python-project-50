@@ -1,14 +1,14 @@
 import json
 import yaml
 from gendiff.parser import find_diff
-from gendiff.stylish import make_view
+from gendiff.formats.choice_format import choice_format
 
 
-def generate_diff(file1, file2, formater="stylish"):
+def generate_diff(file1, file2, format='stylish'):
     dict_1 = make_argument(file1)
     dict_2 = make_argument(file2)
     diff_list = find_diff(dict_1, dict_2)
-    result = make_view(diff_list)
+    result = choice_format(diff_list, format)
     return result
 
 
