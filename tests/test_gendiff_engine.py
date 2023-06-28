@@ -13,7 +13,8 @@ with (
     open('tests/fixtures/result_test_json_formater.txt', 'r') as
     result_json_form,
     open('tests/fixtures/result_deep_test_json_formater.txt', 'r') as
-    result_json_deep_form):
+    result_json_deep_form
+):
     RESULT = result_file.read()
     DEEP_RESULT = result_deep_file.read()
     RESULT_PLAIN = result_plain.read()
