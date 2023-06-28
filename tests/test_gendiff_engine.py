@@ -14,12 +14,12 @@ with (
     result_json_form,
     open('tests/fixtures/result_deep_test_json_formater.txt', 'r') as
     result_json_deep_form):
-        RESULT = result_file.read()
-        DEEP_RESULT = result_deep_file.read()
-        RESULT_PLAIN = result_plain.read()
-        RESULT_DEEP_PLAIN = result_deep_plain.read()
-        RESULT_JSON_FORM = result_json_form.read()
-        RESULT_JSON_DEEP_FORM = result_json_deep_form.read()
+    RESULT = result_file.read()
+    DEEP_RESULT = result_deep_file.read()
+    RESULT_PLAIN = result_plain.read()
+    RESULT_DEEP_PLAIN = result_deep_plain.read()
+    RESULT_JSON_FORM = result_json_form.read()
+    RESULT_JSON_DEEP_FORM = result_json_deep_form.read()
 FILE_1_PATH = "tests/fixtures/file1.json"
 FILE_2_PATH = "tests/fixtures/file2.json"
 FILE_3_PATH = "tests/fixtures/file3.yml"
