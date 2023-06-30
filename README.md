@@ -39,7 +39,7 @@ Report generation as plain, stylish and json
 4. To start searching for differences, you need to add to gendiff the path to your files, if you want to change the format of gendiff -f your chosen format and the path to the files. For example:
 
 ```bash
-geniff file_1_path.json file_2_path.json
-geniff -f plain file_1_path.json file_2_path.yaml 
-geniff -f json file_1_path.json file_2_path.yaml
+gendiff file_1_path.json file_2_path.json
+gendiff -f plain file_1_path.json file_2_path.yaml 
+gendiff -f json file_1_path.json file_2_path.yaml
 ```

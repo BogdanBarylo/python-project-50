@@ -3,10 +3,12 @@ from gendiff.formats.plain import make_view_plain
 from gendiff.formats.json_formater import make_view_json
 
 
-def choice_format(sorted_result, format):
+def select_format(format):
     if format == 'plain':
-        return make_view_plain(sorted_result)
+        return make_view_plain
     elif format == 'json':
-        return make_view_json(sorted_result)
+        return make_view_json
+    elif format == 'stylish':
+        return make_view
     else:
-        return make_view(sorted_result)
+        raise Exception("Your format isn't correct, chose correct format")
