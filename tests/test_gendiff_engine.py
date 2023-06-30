@@ -1,143 +1,50 @@
+import pytest
 from gendiff.gendiff_engine import generate_diff
 
 
-with (
-    open('tests/fixtures/result_test.txt', 'r') as
-    result_file,
-    open('tests/fixtures/result_deep_test.txt', 'r') as
-    result_deep_file,
-    open('tests/fixtures/result_test_plain.txt', 'r') as
-    result_plain,
-    open('tests/fixtures/result_deep_test_plain.txt', 'r') as
-    result_deep_plain,
-    open('tests/fixtures/result_test_json_formater.txt', 'r') as
-    result_json_form,
-    open('tests/fixtures/result_deep_test_json_formater.txt', 'r') as
-    result_json_deep_form
-):
-    RESULT = result_file.read()
-    DEEP_RESULT = result_deep_file.read()
-    RESULT_PLAIN = result_plain.read()
-    RESULT_DEEP_PLAIN = result_deep_plain.read()
-    RESULT_JSON_FORM = result_json_form.read()
-    RESULT_JSON_DEEP_FORM = result_json_deep_form.read()
-FILE_1_PATH = "tests/fixtures/file1.json"
-FILE_2_PATH = "tests/fixtures/file2.json"
-FILE_3_PATH = "tests/fixtures/file3.yml"
-FILE_4_PATH = "tests/fixtures/file4.yaml"
-FILE_1_DEEP_PATH = "tests/fixtures/file1_deep.json"
-FILE_2_DEEP_PATH = "tests/fixtures/file2_deep.json"
-FILE_3_DEEP_PATH = "tests/fixtures/file3_deep.yml"
-FILE_4_DEEP_PATH = "tests/fixtures/file4_deep.yaml"
+path_1 = "tests/fixtures/file1.json"
+path_2 = "tests/fixtures/file2.json"
+path_3 = "tests/fixtures/file3.yml"
+path_4 = "tests/fixtures/file4.yaml"
+path_1_d = "tests/fixtures/file1_deep.json"
+path_2_d = "tests/fixtures/file2_deep.json"
+path_3_d = "tests/fixtures/file3_deep.yml"
+path_4_d = "tests/fixtures/file4_deep.yaml"
+result = 'tests/fixtures/result_test.txt'
+deep_result = 'tests/fixtures/result_deep_test.txt'
+result_plain = 'tests/fixtures/result_test_plain.txt'
+result_deep_plain = 'tests/fixtures/result_deep_test_plain.txt'
+result_json = 'tests/fixtures/result_test_json_formater.txt'
+result_json_deep = 'tests/fixtures/result_deep_test_json_formater.txt'
+format = ['stylish', 'plain', 'json']
 
 
-def test_generate_diff_json():
-    assert generate_diff(FILE_1_PATH, FILE_2_PATH) == RESULT
-
-
-def test_generate_diff_yml():
-    assert generate_diff(FILE_3_PATH, FILE_4_PATH) == RESULT
-
-
-def test_generate_cross_diff_json_yml():
-    assert generate_diff(FILE_1_PATH, FILE_4_PATH) == RESULT
-
-
-def test_yaml_to_json_result():
-    assert generate_diff(FILE_3_PATH, FILE_2_PATH) == RESULT
-
-
-def test_deep_generate_diff_json():
-    assert generate_diff(FILE_1_DEEP_PATH, FILE_2_DEEP_PATH) == DEEP_RESULT
-
-
-def test_deep_generate_diff_yml():
-    assert generate_diff(FILE_3_DEEP_PATH, FILE_4_DEEP_PATH) == DEEP_RESULT
-
-
-def test_deep_generate_cross_diff_json_yml():
-    assert generate_diff(FILE_1_DEEP_PATH, FILE_4_DEEP_PATH) == DEEP_RESULT
-
-
-def test_deep_generate_cross_diff_yml_json():
-    assert generate_diff(FILE_3_DEEP_PATH, FILE_2_DEEP_PATH) == DEEP_RESULT
-
-
-def test_generate_diff_json_format_plain():
-    assert generate_diff(FILE_1_PATH, FILE_2_PATH,
-                         format='plain') == RESULT_PLAIN
-
-
-def test_generate_diff_yml_format_plain():
-    assert generate_diff(FILE_3_PATH, FILE_4_PATH,
-                         format='plain') == RESULT_PLAIN
-
-
-def test_generate_cross_diff_json_yml_format_plain():
-    assert generate_diff(FILE_1_PATH, FILE_4_PATH,
-                         format='plain') == RESULT_PLAIN
-
-
-def test_generate_cross_diff_yml_json_format_plain():
-    assert generate_diff(FILE_3_PATH, FILE_2_PATH,
-                         format='plain') == RESULT_PLAIN
-
-
-def test_deep_generate_diff_json_format_plain():
-    assert generate_diff(FILE_1_DEEP_PATH, FILE_2_DEEP_PATH,
-                         format='plain') == RESULT_DEEP_PLAIN
-
-
-def test_deep_generate_diff_yml_format_plain():
-    assert generate_diff(FILE_3_DEEP_PATH, FILE_4_DEEP_PATH,
-                         format='plain') == RESULT_DEEP_PLAIN
-
-
-def test_deep_generate_cross_diff_json_yml_format_plain():
-    assert generate_diff(FILE_1_DEEP_PATH, FILE_4_DEEP_PATH,
-                         format='plain') == RESULT_DEEP_PLAIN
-
-
-def test_deep_generate_cross_diff_yml_json_format_plain():
-    assert generate_diff(FILE_3_DEEP_PATH, FILE_2_DEEP_PATH,
-                         format='plain') == RESULT_DEEP_PLAIN
-
-
-def test_generate_diff_json_format_json():
-    assert generate_diff(FILE_1_PATH, FILE_2_PATH,
-                         format='json') == RESULT_JSON_FORM
-
-
-def test_generate_diff_yml_format_json():
-    assert generate_diff(FILE_3_PATH, FILE_4_PATH,
-                         format='json') == RESULT_JSON_FORM
-
-
-def test_generate_cross_diff_json_yml_format_json():
-    assert generate_diff(FILE_1_PATH, FILE_4_PATH,
-                         format='json') == RESULT_JSON_FORM
-
-
-def test_generate_cross_diff_yml_json_format_json():
-    assert generate_diff(FILE_3_PATH, FILE_2_PATH,
-                         format='json') == RESULT_JSON_FORM
-
-
-def test_deep_generate_diff_json_format_json():
-    assert generate_diff(FILE_1_DEEP_PATH, FILE_2_DEEP_PATH,
-                         format='json') == RESULT_JSON_DEEP_FORM
-
-
-def test_deep_generate_diff_yml_format_json():
-    assert generate_diff(FILE_3_DEEP_PATH, FILE_4_DEEP_PATH,
-                         format='json') == RESULT_JSON_DEEP_FORM
-
-
-def test_deep_generate_cross_diff_json_yml_format_json():
-    assert generate_diff(FILE_1_DEEP_PATH, FILE_4_DEEP_PATH,
-                         format='json') == RESULT_JSON_DEEP_FORM
-
-
-def test_deep_generate_cross_diff_yml_json_format_json():
-    assert generate_diff(FILE_3_DEEP_PATH, FILE_2_DEEP_PATH,
-                         format='json') == RESULT_JSON_DEEP_FORM
+@pytest.mark.parametrize('path_1, path_2, format, result',
+                          [(path_1, path_2, 'stylish', result),
+                           (path_3, path_4, 'stylish', result),
+                           (path_1, path_4, 'stylish', result),
+                           (path_3, path_2, 'stylish', result),
+                           (path_1_d, path_2_d, 'stylish', deep_result),
+                           (path_3_d, path_4_d, 'stylish', deep_result),
+                           (path_1_d, path_4_d, 'stylish', deep_result),
+                           (path_3_d, path_2_d, 'stylish', deep_result),
+                           (path_1, path_2, 'plain', result_plain),
+                           (path_3, path_4, 'plain', result_plain),
+                           (path_1, path_4, 'plain', result_plain),
+                           (path_3, path_2, 'plain', result_plain),
+                           (path_1_d, path_2_d, 'plain', result_deep_plain),
+                           (path_3_d, path_4_d, 'plain', result_deep_plain),
+                           (path_1_d, path_4_d, 'plain', result_deep_plain),
+                           (path_3_d, path_2_d, 'plain', result_deep_plain),
+                           (path_1, path_2, 'json', result_json),
+                           (path_3, path_4, 'json', result_json),
+                           (path_1, path_4, 'json', result_json),
+                           (path_3, path_2, 'json', result_json),
+                           (path_1_d, path_2_d, 'json', result_json_deep),
+                           (path_3_d, path_4_d, 'json', result_json_deep),
+                           (path_1_d, path_4_d, 'json', result_json_deep),
+                           (path_3_d, path_2_d, 'json', result_json_deep)])
+def test_generate_diff(path_1, path_2, format, result):
+    with open (result) as f:
+        true_result = f.read()
+    assert generate_diff(path_1, path_2, format) == true_result

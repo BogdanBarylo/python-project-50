@@ -2,13 +2,13 @@ DEFAULT_INDENT = " " * 2
 
 
 def make_view(sorted_result):
-    final_result = list(map(lambda node: make_level(node, 1), sorted_result))
+    final_result = list(map(lambda node: make_level(node, 0), sorted_result))
     result = '{' + '\n' + '\n'.join(final_result) + '\n' + '}'
     return result
 
 
 def make_level(node, level):
-    indent = DEFAULT_INDENT * level
+    indent = DEFAULT_INDENT * (level + 1)
     node_type = node['type']
     if node_type in NODE_TO_STR:
         return NODE_TO_STR[node_type](node, level, indent)
@@ -59,10 +59,10 @@ def to_str(value, level=0):
     elif isinstance(value, dict):
         lines = ["{"]
         for k, v in value.items():
-            formatted_body = (f'{DEFAULT_INDENT * (level + 1)}{k}: '
+            formatted_body = (f'{DEFAULT_INDENT * (level + 2)}{k}: '
                               f'{to_str(v, level + 2)}')
             lines.append(formatted_body)
-        lines.append(f'{DEFAULT_INDENT * (level - 1)}}}')
+        lines.append(f'  {DEFAULT_INDENT * (level - 1)}}}')
         return "\n".join(lines)
     else:
         return str(value)
