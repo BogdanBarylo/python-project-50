@@ -43,7 +43,7 @@ result_json_deep = 'tests/fixtures/result_deep_test_json_formater.txt'
                           (path_3_d, path_4_d, 'json', result_json_deep),
                           (path_1_d, path_4_d, 'json', result_json_deep),
                           (path_3_d, path_2_d, 'json', result_json_deep)])
-def test_generate_diff_stylish(path_1, path_2, format, result):
+def test_generate_diff(path_1, path_2, format, result):
     with open(result) as f:
         true_result = f.read()
     assert generate_diff(path_1, path_2, format) == true_result
